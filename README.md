@@ -17,7 +17,7 @@ Update: Edit tasks to modify attributes like due date, title, description, and s
 
 Delete: Remove tasks that are no longer needed.
 
-#Task Attributes:
+# Task Attributes:
 
 Title: A brief and clear title to identify the task.
 
