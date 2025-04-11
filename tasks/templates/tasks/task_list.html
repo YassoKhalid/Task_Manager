@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Task List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: #f0f4f8;
+            /* Light blue-gray tone instead of white */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        li {
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        li:hover {
+            background-color: #e2e6ea;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-custom {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Task List</h1>
+        <div class="mb-3 text-right">
+            <a href="{% url 'task_add' %}" class="btn btn-success">Add Task</a>
+        </div>
+        <ul class="list-unstyled">
+            {% for task in tasks %}
+            <li class="d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>{{ task.title }}</strong>
+                    <hr> - {{ task.description }}
+                    <hr>
+                    {% if task.status == "completed" %}
+                    <span class="badge badge-success ml-2">Completed</span>
+                    {% else %}
+                    <span class="badge badge-warning ml-2">Not Completed</span>
+                    {% endif %}
+                    
+                </div>
+                <div>
+                    <a href="{% url 'task_edit' task.pk %}" class="btn btn-primary btn-sm btn-custom">Edit</a>
+                    <a href="{% url 'task_delete' task.pk %}" class="btn btn-danger btn-sm btn-custom">Delete</a>
+                </div>
+            </li>
+            {% empty %}
+            <li class="text-center">No tasks available.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
